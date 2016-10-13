@@ -1,4 +1,4 @@
-#activity-boilerplate
+#vue-boilerplate
 
 ## 注意事项
 - windows 系统使用`npm run dev`会发生奇怪的事情[^win-webapck-dashboard], 请使用`npm run dev:win`;
