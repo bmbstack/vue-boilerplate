@@ -1,17 +1,34 @@
 {
-    "presets": ["es2015", "es2016", "es2017", "stage-2"],
+    "presets": ["es2015", "stage-2"],
     "plugins": [
+        "transform-decorators-legacy",
+        "transform-vue-jsx",
         "transform-runtime"
     ],
+    "ignore": [
+        "node_modules/",
+        "dist/"
+    ],
     env: {
+        "development": {
+            "plugins": []
+        },
         "production": {
             "plugins": [
+                "transform-inline-consecutive-adds",
                 "transform-merge-sibling-variables",
-                "transform-minify-booleans",
                 "transform-property-literals",
                 "transform-remove-debugger",
                 "transform-remove-console",
-                "transform-node-env-inline"
+                "transform-node-env-inline",
+                "transform-member-expression-literals",
+                "transform-minify-booleans",
+                "transform-node-env-inline",
+                "minify-constant-folding",
+                "minify-dead-code-elimination",
+                "minify-guarded-expressions",
+                "minify-simplify",
+                "minify-type-constructors"
             ]
         }
     }

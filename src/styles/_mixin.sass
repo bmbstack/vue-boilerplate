@@ -1,0 +1,50 @@
+/**
+ * 混合指令
+ */
+
+// 垂直居中
+@mixin mixin-vertical-center
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+
+// 水平居中
+@mixin mixin-horizontal-center
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+
+// 屏幕居中
+@mixin mixin-screen-center
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+
+// 自动显示省略号
+@mixin mixin-auto-ellipsis
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+// 线性渐变
+@mixin mixin-linear-gradient($origin, $start, $stop)
+    background: $start
+    background: -webkit-linear-gradient($origin, $start 60%, $stop)
+    background: linear-gradient(to $origin, $start 60%, $stop)
+
+// 模糊滤镜
+@mixin mixin-blur($blur: 10px)
+    // filter: url(blur.svg#blur) /* FireFox, Chrome, Opera */
+    -webkit-filter: blur($blur) /* Chrome, Opera */
+    -moz-filter: blur($blur)
+    -ms-filter: blur($blur)    
+    filter: blur($blur)
+
+    // filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=@blur, MakeShadow=false) /* IE6~IE9 */
+
+@mixin slide-up($name)
+    &.#{$name}-enter-active, &.#{$name}-leave-active
+        transform: translateY(0)
+    &.#{$name}-enter, &.#{$name}-leave-to /* .fade-leave-active in <2.1.8 */
+        transform: translateY(100%)

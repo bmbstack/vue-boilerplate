@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>概述</h1><p>vue-boilerplate</p>
+<h2>当前版本</h2><p>Version 3.3.2</p>
+<h2>History</h2><ul>
+<li>2017年03月10日
+  Version 3.3.2<ol>
+<li>更新build配置;<ul>
+<li>去掉最终生成HTML文件中的注释;</li>
+<li>在最终生成的HTML文件添加版本号;</li>
+</ul>
+</li>
+<li>添加es6-promise, 和mockjs;</li>
+<li>添加toast组件和shareInApp组件(参见文档);</li>
+<li>添加单词部落老师端/学生端环境判断(参见文档);</li>
+<li>添加exitWindow退出当前Native窗口的Hybird操作(参见文档);</li>
+</ol>
+</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>&lt;!-- HTML中生成的版本号 -->
+&lt;input type=&quot;hidden&quot; name=&quot;version&quot; id=&quot;version&quot; value=&quot;1.0.0&quot; /></code></pre><pre class="prettyprint source lang-javascript"><code>// 添加es6-promise 垫片引用
+require('es6-promise/auto');
+
+// 使用mockjs
+if (process.env.NODE_ENV === 'development') {
+    const Mock = require('mockjs');
+    Mock.mock(WEB_API.CREATE_CLASS_TASK_URL, {
+        code: 99999,
+        msg: 'success',
+        data: {
+            step: 1
+        }
+    });
+
+    Mock.mock(WEB_API.RECEIVE_COIN_URL, {
+        code: 99999
+    });
+}</code></pre><ul>
+<li>2017年03月04日<ol>
+<li>添加环境判断函数: 单词部落老师端, 单词部落学生端;</li>
+<li>优化自适应脚本;</li>
+<li>优化性能统计;</li>
+<li>部署部分库到cdn;</li>
+<li>全名改用sass;</li>
+<li>http请求改为vue-resource: 因为部分android不支持;</li>
+</ol>
+</li>
+<li>2017年02月28日<ol>
+<li>去掉in-view;</li>
+<li>去掉vue-gesture;</li>
+<li>添加es6-promise;</li>
+<li>添加Hybird交互示例;</li>
+</ol>
+</li>
+<li>2017年02月22日<ol>
+<li>修改性能统计脚本,使其7天内第一次打开页面时发送一次数据;</li>
+</ol>
+</li>
+<li>2017年02月18日<ol>
+<li><strong>重大BUG</strong>修复: v-tap事件绑定缺陷;</li>
+</ol>
+</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>import Vue from 'vue';
+import VueTap from 'path/to/vue-tap';
+
+Vue.use(VueTap);
+// or
+Vue.use(VueTap, {
+    moment: 100,    // 按下抬起间隔100ms
+    distance: 40,   // 按下抬起间距40像素
+});</code></pre><ul>
+<li><p>2017年02月15日</p>
+<ol>
+<li>添加toast;</li>
+</ol>
+</li>
+<li><p>2017年02月14日</p>
+<ol>
+<li>修改访问路径;</li>
+<li>去除notification-logger组件;</li>
+<li>优化页面属性;</li>
+<li>添加常用less函数;</li>
+</ol>
+</li>
+<li><p>2017年02月09日</p>
+<ol>
+<li>添加跑马灯组件marqueeLine;</li>
+</ol>
+</li>
+</ul>
+<pre class="prettyprint source lang-jsx"><code>&lt;marquee-line  speed={ 5 }>
+    &lt;div>你好呀, 小妹妹, 叔叔给你糖吃, 叔叔家里还有好多小猫小狗&lt;/div>
+    &lt;div>你好呀, 小妹妹, 叔叔给你糖吃&lt;/div>
+    &lt;div>你好呀, 小妹妹, 叔叔给你糖吃, 叔叔家里还有好多小猫小狗&lt;/div>
+    &lt;div>你好呀, 小妹妹, 叔叔给你糖吃&lt;/div>
+    &lt;div>你好呀, 小妹妹, 叔叔给你糖吃, 叔叔家里还有好多小猫小狗&lt;/div>
+    &lt;div>你好呀, 小妹妹, 叔叔给你糖吃&lt;/div>
+&lt;/marquee-line></code></pre><ul>
+<li><p>2017年02月07日</p>
+<ol>
+<li>修复vue-tap在PC上的bug;</li>
+</ol>
+</li>
+<li><p>2017年01月13日</p>
+<ol>
+<li>添加字体处理, 并明确字体设置规则;</li>
+</ol>
+</li>
+<li><p>2017年01月03日</p>
+<ol>
+<li>添加Notification Logger;</li>
+</ol>
+</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>if (process.env.NODE_ENV === 'development') {
+    require('notification-logger');
+    logger.init();
+    console.log('欢迎使用vue-bolilerplate.  fe@knowbox.com 敬上.', '欢迎');
+}</code></pre><ul>
+<li>2017年01月02日<ol>
+<li>添加埋点Vue插件;</li>
+<li>添加性能统计脚本:<ul>
+<li>首屏时间(src/static/js/performance-first-screen.js);</li>
+<li>白屏时间(src/static/js/performance-white-screen.js);</li>
+<li>用户可操作时间(src/static/js/performance-ready.js);</li>
+<li>总下载时间(src/static/js/performance-load.js);</li>
+<li>如果不改模板, 不需要纠结性能统计的问题, 除了需要<strong>修改一下模板中的data-performance-host属性值</strong></li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>// Usage:
+import Vue from 'vue';
+import VueRecord from 'path/to/plugins/vue-record';
+
+Vue.use(VueRecord, {
+    host: 'http://domain.com'
+});  // like other vue plugin
+
+// you also can use absolute url in v-directive
+// &lt;div v-record-click=&quot;http://domain.com/record?type=userclick&action=click&quot;>&lt;/div>
+
+new Vue({
+    render: h => // eslint-disable-line no-undef
+        &lt;div 
+            v-record-load=&quot;/record?type=pageload&action=load&quot;
+            v-record-click=&quot;/record?type=userclick&action=click&quot;>&lt;/div>
+})</code></pre><pre class="prettyprint source lang-html"><code>&lt;body data-performance-host=&quot;http://domain.com/performance&quot;>
+    &lt;div>
+        &lt;!-- ... -->
+    &lt;/div>
+&lt;/body></code></pre><ul>
+<li>2016年12月22日<ol>
+<li>添加<a href="http://www.css88.com/doc/jsdoc/index.html">jsdoc</a>;</li>
+</ol>
+</li>
+</ul>
+<pre class="prettyprint source lang-shell"><code>yarn run doc</code></pre><ul>
+<li>2016年12月16日<ol>
+<li>添加<a href="http://eslint.org/docs/rules/">eslint</a>, 重新所有utils文件</li>
+<li>添加分享api库文件(微信, QQ);</li>
+</ol>
+</li>
+</ul>
+<pre class="prettyprint source lang-yaml"><code># .eslintrc.yml 示例
+ruls:
+  indent:
+    - error
+    - 4</code></pre><ul>
+<li>2016年12月15日<ol>
+<li>修复生成/清除目标文件地址错误;</li>
+<li>合并生成文件的配置, 生成目录/dist/${process.env.NODE_ENV}/依赖环境变量;</li>
+</ol>
+</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>// 删除生成的文件
+// https://github.com/johnagan/clean-webpack-plugin
+new CleanWebpackPlugin([DIST_PATH], {
+    root: path.join(__dirname, '../'),
+    verbose: true,
+    dry: false,
+    exclude: [],
+}),</code></pre><ul>
+<li>2016年12月12日<ol>
+<li>添加less配置项(Example 1);</li>
+<li>添加滚动处理标记(Example 2);</li>
+</ol>
+</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>// Example 1
+// less or sass variable configuration
+const cssOptions = JSON.stringify({
+    modifyVars: {
+        'theme-color': 'red'
+    }
+});</code></pre><pre class="prettyprint source lang-html"><code>&lt;!-- 页面中唯一的可滚动元素 -->
+&lt;div scroll>&lt;/div></code></pre><ul>
+<li><p>2016年12月08日</p>
+<ol>
+<li>添加axios异步请求方案;</li>
+<li>标准化目录结构;</li>
+</ol>
+</li>
+<li><p>2016年12月07日</p>
+<ol>
+<li>去掉对webpack-dashboard插件的使用;</li>
+<li>启用<a href="http://webpack.github.io/docs/list-of-plugins.html#bannerplugin">webpack.BannerPlugin</a>插件, 用于在脚本文件添加版本信息;</li>
+<li>添加渲染raw html的代码示例(Example 1);</li>
+<li>添加<a href="https://github.com/1337programming/webpack-shell-plugin">webpack-shell-plugin</a>插件的使用, 用于在dev-server准备就绪时自动打开浏览器(Example 2);</li>
+</ol>
+</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>// Example 1
+const component = {
+    render(h) {
+        // Dangerious! Make sure you won't be XSS attacked;
+        return (
+            &lt;div { ...{ domProps: { innerHTML: &quot;&lt;span>&lt;/span>&quot; } } }>&lt;/div>
+        );
+    }
+}</code></pre><pre class="prettyprint source lang-javascript"><code>// Example 2
+// ./webpack.config.development.js
+const result = {
+    plugins: [
+        new WebpackShellPlugin({
+            onBuildStart: ['echo ...'],
+            onBuldEnd: ['open http://localhost:8090/example.html']
+        })
+    ]
+}</code></pre><ul>
+<li><p>2016年12月06日</p>
+<ol>
+<li>添加vuex2.x和vue-router2.x;</li>
+<li>添加基于mocha+chai的测试用例示例;</li>
+<li>去除vue-resource, 用isomorphic-fetch替代. 理由是vue-resource依赖DOM对象, 不适合做代码同构;</li>
+<li>优化了utils的工具函数;</li>
+<li>修改v-tap.js使其兼容vue2.x,并不再支持vue1.x, 并修复一个v-tap的bug;</li>
+<li>添加埋点库<a href="https://github.com/camwiegert/in-view">in-view</a>;</li>
+</ol>
+</li>
+<li><p>2016年10月25日</p>
+<ol>
+<li>取消对webpack-dashboard的使用,所以同时去掉了package.json中的script -&gt; <code>npm run dev:win</code>;</li>
+<li>使用JSX语法与Render函数编写<code>project/components/example1.js</code>组件;</li>
+<li>使用传统方法编写<code>project/components/example2.vue</code>组件;</li>
+<li>在<code>project/module/example.js</code>中使用上述两种方式编写的组件:<ul>
+<li>Render函数必须保留第一个参数h, <a href="https://vuejs.org/guide/render-function.html">为什么?</a>;</li>
+<li>使用JSX语法编写的组件不需要在根实例中注册即可在Render函数中使用;</li>
+<li>传统方法编写的组件仍需在html文件使用.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p><strong>注意</strong>: 使用JSX需要安装额外的<a href="https://github.com/vuejs/babel-plugin-transform-vue-jsx#usage">babel插件</a>, 本脚手架中已安装;</p>
+<ul>
+<li><p>2016年10月19日</p>
+<ol>
+<li>添加sass-loader, 加载vue文件之外的sass文件;  </li>
+<li>修改vue版本为2.0</li>
+</ol>
+</li>
+<li><p>2016年09月24日</p>
+<ol>
+<li>添加工作平台操作系统识别,windows在以下情况下需要特殊处理:<ul>
+<li>在开发时引用compatible.js文件,需要手动require, 无法在模板中通过script引入</li>
+</ul>
+</li>
+<li>验证编译条件环境标识通过</li>
+<li>添加JSON-loader</li>
+</ol>
+</li>
+<li><p>2016年09月23日 
+  添加less-loader, 加载vue文件之外的less文件;</p>
+</li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-components_containers.html">components/containers</a></li><li><a href="module-components_dumb.html">components/dumb</a></li><li><a href="module-constants_api.html">constants/api</a></li><li><a href="module-constants_http.html">constants/http</a></li><li><a href="module-constants_shareResult.html">constants/shareResult</a></li><li><a href="module-net_httpProxy.html">net/httpProxy</a></li><li><a href="module-utils.html">utils</a></li><li><a href="module-utils_env.html">utils/env</a></li><li><a href="module-utils_hybird.html">utils/hybird</a></li></ul><h3>Classes</h3><ul><li><a href="module-components_containers.Welcome.html">Welcome</a></li><li><a href="module-components_dumb.MarqueeLine.html">MarqueeLine</a></li><li><a href="module-components_dumb.ShareInApp.html">ShareInApp</a></li><li><a href="module-components_dumb.Toast.html">Toast</a></li><li><a href="module-utils.QueryString.html">QueryString</a></li><li><a href="module-utils.Storage.html">Storage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Mar 10 2017 12:58:29 GMT+0800 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

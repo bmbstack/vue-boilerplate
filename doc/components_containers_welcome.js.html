@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/containers/welcome.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/containers/welcome.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { marqueeLine, toast, shareInApp } from '../dumb';
+
+import { sendMessage } from '../../utils/hybird';
+import { MOBILE_API } from '../../constants/api';
+import Storage from '../../utils/storage';
+
+/**
+ * 欢迎组件(示例)
+ * @class Welcome
+ * @memberof module:components/containers
+ * @example
+ * import { welcome } from 'path/to/components/containers'
+ * export default {
+ *     components: {
+ *         welcome
+ *     },
+ *     render(h) {
+ *         return (&lt;welcome msg={"World"}>&lt;/welcome>)
+ *     }
+ * }
+ */
+const welcome = {
+    name: 'welcome',
+    components: {
+        marqueeLine,
+        shareInApp,
+        toast,
+    },
+    data() {
+        return {
+            show: true,
+        }
+    },
+    /**
+     * @lends module:components/containers.welcome
+     */
+    props: {
+        /**
+         * @type {number}
+         * @desc 显示的文案
+         */
+        msg: {
+            type: String,
+            default: 'World'
+        }
+    },
+    render(h) { // eslint-disable-line
+        const { show } = this;
+
+        return (
+            &lt;div v-record-click="/record?type=userclick&amp;action=click" scroll>
+                { h('div', { domProps: { innerHTML: '&lt;span style="color: red;">Welcome&lt;/span>' } }) }
+                &lt;div {...{ domProps: { innerHTML: '&lt;span style="color: red;">Welcome&lt;/span>' } }}>&lt;/div>
+                { 
+                    this.show &amp;&amp; &lt;div class="example abc" 
+                        v-record-load="/record?type=pageload&amp;action=load"
+                        v-tap={this.handleClick}>Hello {this.msg}&lt;/div>
+                }
+                &lt;div class="example cba" 
+                    v-record-load="/record?type=pageload&amp;action=load"
+                    v-tap={this.handleTouch}>扯呼&lt;/div>
+                &lt;div class="1example other">Oh Yeah&lt;/div>
+                &lt;marquee-line  speed={ 5 }>
+                    &lt;div>精忠报国&lt;/div>
+                    &lt;div>精忠报国&lt;/div>
+                    &lt;div>精忠报国&lt;/div>
+                    &lt;div>精忠报国&lt;/div>
+                    &lt;div>精忠报国&lt;/div>
+                    &lt;div>精忠报国&lt;/div>
+                    &lt;div>精忠报国&lt;/div>
+                    &lt;div>精忠报国&lt;/div>
+                    &lt;div>精忠报国&lt;/div>
+                    &lt;div>精忠报国&lt;/div>
+                    &lt;div>精忠报国&lt;/div>
+                    &lt;div>精忠报国&lt;/div>
+                    &lt;div>精忠报国&lt;/div>
+                &lt;/marquee-line>
+                &lt;toast message="Hello" />
+                &lt;share-in-app show={ !show } />
+            &lt;/div>
+        );
+    },
+    methods: {
+        handleClick(event) {
+            this.show = !this.show;
+            console.log(event)
+        },
+        handleTouch(event) {
+            // how to use hybird method
+            sendMessage(MOBILE_API.OPEN_NEW_WINDOW_URL, { title: Storage.getData('FEWebView'), url: "http://192.168.40.155:8091/example.html" })
+            this.show = !this.show;
+        }
+    }
+};
+
+export default welcome;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-components_containers.html">components/containers</a></li><li><a href="module-components_dumb.html">components/dumb</a></li><li><a href="module-constants_api.html">constants/api</a></li><li><a href="module-constants_http.html">constants/http</a></li><li><a href="module-constants_shareResult.html">constants/shareResult</a></li><li><a href="module-net_httpProxy.html">net/httpProxy</a></li><li><a href="module-utils.html">utils</a></li><li><a href="module-utils_env.html">utils/env</a></li><li><a href="module-utils_hybird.html">utils/hybird</a></li></ul><h3>Classes</h3><ul><li><a href="module-components_containers.Welcome.html">Welcome</a></li><li><a href="module-components_dumb.MarqueeLine.html">MarqueeLine</a></li><li><a href="module-components_dumb.ShareInApp.html">ShareInApp</a></li><li><a href="module-components_dumb.Toast.html">Toast</a></li><li><a href="module-utils.QueryString.html">QueryString</a></li><li><a href="module-utils.Storage.html">Storage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Mar 10 2017 12:58:29 GMT+0800 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

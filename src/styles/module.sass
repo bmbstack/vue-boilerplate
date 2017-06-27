@@ -1,0 +1,67 @@
+/**
+ * 组件模块
+ */
+@import './mixin.sass'
+
+// 跑马灯
+.marquee-line
+    font-size: 0
+    display: block
+    word-break: keep-all
+    white-space: nowrap
+    box-sizing: border-box
+    overflow: hidden
+    width: 100%
+
+    > div
+        font-size: 0.5rem
+        display: inline-block
+        padding-right: 1rem
+        box-sizing: border-box
+
+// toast
+.toast
+    padding: 0.25rem 0.5rem
+    @include mixin-screen-center
+
+// App内分享
+ul.share
+    height: 1.8rem
+    width: 100%
+    padding: 0.46rem 0 0
+    box-sizing: border-box
+    margin: 0
+    position: absolute
+    bottom: 0
+    display: table
+    list-style: none
+    transition: transform 0.4s
+    will-change: transform
+    @include slide-up('share')
+    &:before
+        position: absolute
+        left: 0.12rem
+        top: 0.12rem
+        content: '分享到'
+        display: block
+    > li
+        display: table-cell
+        text-align: center
+        &.qq-app
+            &:after
+                content: 'QQ'
+        &.qq-zone
+            &:after
+                content: 'QQ空间'
+        &.wechat-app
+            &:after
+                content: '微信'
+        &.wechat-timeline
+            &:after
+                content: '朋友圈'
+        > img
+            $size: 0.96rem
+            display: block
+            margin: 0 auto 0.04rem
+            width: $size
+            height: $size

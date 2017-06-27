@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: utils/share.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: utils/share.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* global process, wx, mqq */
+
+import { isRunInQQ } from './env';
+import require from './require';
+import httpProxy from '../net/httpProxy';
+import { HTTP_METHOD } from '../constants/http';
+import { WEB_API } from '../constants/api';
+import packageJSON from '../../package.json';
+
+const WECHAT_API_SRC = 'jweixin-1.0.0.js';
+const QQ_API_SRC = 'qqapi.js';
+const __DEVELOPMENT__ = process.env.NODE_ENV === 'development';
+
+export {
+    setupWeChat,
+    setupQQ,
+    setupShare,
+};
+
+/**
+ * 设置微信分享
+ * @function
+ * @memberof module:utils
+ * @param {string} targetURL 分享的地址
+ * @param {string} title 分享标题
+ * @param {string} desc 分享文案
+ * @returns {undefined}
+ * @example
+ * import { setupWeChat } from 'path/to/utils/share';
+ * setupWeChat('http://knowbox.com/share.html', '分享标题', '分享文案');
+ */
+function setupWeChat(targetURL, title, desc) {
+    console.info('正在设置微信分享');
+
+    httpProxy(WEB_API.WX_CONFIG_URL, HTTP_METHOD.POST, { url: targetURL })
+        .then((configObject) => {
+            require(WECHAT_API_SRC, function() {
+                if (!wx) {
+                    console.error('初始化wechat js sdk失败');
+                    return;
+                }
+
+                wx.config(Object.assign({}, configObject, {
+                    debug: __DEVELOPMENT__,
+                    jsApiList: [
+                        'checkJsApi',
+                        'onMenuShareTimeline',
+                        'onMenuShareAppMessage',
+                        'onMenuShareQQ',
+                        'onMenuShareWeibo',
+                    ],
+                }));
+
+                const shareData = {
+                    title,
+                    desc,
+                    link: targetURL,
+                    imgUrl: packageJSON.logo,
+                };
+
+                wx.ready(() => {
+                    wx.onMenuShareAppMessage(shareData);
+                    wx.onMenuShareTimeline(shareData);
+                    wx.onMenuShareQQ(shareData);
+                    wx.onMenuShareQZone(shareData);
+                    console.info('设置微信分享完成', shareData);
+                });
+
+                wx.error((res) => {
+                    console.error('设置微信分享失败', res.errMsg);
+                });
+            });
+        });
+}
+
+/**
+ * 设置QQ分享
+ * @function
+ * @memberof module:utils
+ * @param {string} targetURL 分享的地址
+ * @param {string} title 分享标题
+ * @param {string} desc 分享文案
+ * @returns {undefined}
+ * @example
+ * import { setupQQ } from 'path/to/utils/share';
+ * setupQQ('http://knowbox.com/share.html', '分享标题', '分享文案');
+ */
+function setupQQ(targetURL, title, desc) {
+    if (!isRunInQQ()) {
+        console.info('未运行在QQ环境中');
+        return;
+    }
+
+    console.info('设置QQ分享');
+    require(QQ_API_SRC, function() {
+        const shareData = {
+            share_url: targetURL,
+            title,
+            desc,
+            image_url: packageJSON.logo,
+        };
+
+        mqq.data.setShareInfo(shareData);
+        console.info('设置QQ分享完成', shareData);
+    });
+}
+
+/**
+ * 设置分享, 包括QQ和weChat, 懒人方法
+ * @function
+ * @memberof module:utils
+ * @param {string} targetURL 分享的地址
+ * @param {string} title 分享标题
+ * @param {string} desc 分享文案
+ * @returns {undefined}
+ * @example
+ * import { setupShare } from 'path/to/utils/share';
+ * setupShare('http://knowbox.com/share.html', '分享标题', '分享文案');
+ */
+function setupShare(targetURL = '未设置', title = '未设置', desc = '未设置') {
+    console.groupCollapsed('设置分享');
+    setupWeChat(targetURL, title, desc);
+    setupQQ(targetURL, title, desc);
+    console.groupEnd();
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-components_containers.html">components/containers</a></li><li><a href="module-components_dumb.html">components/dumb</a></li><li><a href="module-constants_api.html">constants/api</a></li><li><a href="module-constants_http.html">constants/http</a></li><li><a href="module-constants_shareResult.html">constants/shareResult</a></li><li><a href="module-net_httpProxy.html">net/httpProxy</a></li><li><a href="module-utils.html">utils</a></li><li><a href="module-utils_env.html">utils/env</a></li><li><a href="module-utils_hybird.html">utils/hybird</a></li></ul><h3>Classes</h3><ul><li><a href="module-components_containers.Welcome.html">Welcome</a></li><li><a href="module-components_dumb.MarqueeLine.html">MarqueeLine</a></li><li><a href="module-components_dumb.ShareInApp.html">ShareInApp</a></li><li><a href="module-components_dumb.Toast.html">Toast</a></li><li><a href="module-utils.QueryString.html">QueryString</a></li><li><a href="module-utils.Storage.html">Storage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Mar 10 2017 12:58:29 GMT+0800 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
