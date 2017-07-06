@@ -1,8 +1,8 @@
 {
-  "name": "mailbox48",
+  "name": "vue-boilerplate",
   "base": "activity-boilerplate@3.5.0",
   "version": "1.0.0",
-  "description": "脚手架",
+  "description": "vue脚手架",
   "main": "index.js",
   "scripts": {
     "test:app": "cross-env NODE_ENV=development mocha ./test/actions/**/*.spec.js ./test/mutations/**/*.spec.js --bail --compilers js:babel-core/register -t 5000 -s 1000",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/bmbstack/vue-boilerplate.git"
   },
   "author": "nixon",
   "license": "MIT",

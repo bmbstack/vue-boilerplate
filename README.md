@@ -2,9 +2,9 @@
 
 vue-boilerplate
 
-## 当前版本
+## 当前版本 1.0.0
 
-Version 3.5.0
+基于activity-boilerplate Version 3.5.0
 
 ## History
 
@@ -52,8 +52,7 @@ const imagePublicProduction = `/${package.name}/dist/${process.env.NODE_ENV}/`;
         - 在最终生成的HTML文件添加版本号;
     2. 添加es6-promise, 和[mockjs](http://mockjs.com/)@[Github](https://github.com/nuysoft/Mock);
     3. 添加toast组件和shareInApp组件(参见文档);
-    4. 添加单词部落老师端/学生端环境判断(参见文档);
-    5. 添加exitWindow退出当前Native窗口的Hybird操作(参见文档);
+    4. 添加exitWindow退出当前Native窗口的Hybird操作(参见文档);
 
 ```HTML
 <!-- HTML中生成的版本号 -->
@@ -82,7 +81,7 @@ if (process.env.NODE_ENV === 'development') {
 ```
 
 - 2017年03月04日
-    1. 添加环境判断函数: 单词部落老师端, 单词部落学生端;
+    1. 添加环境判断函数; 
     2. 优化自适应脚本;
     3. 优化性能统计;
     4. 部署部分库到cdn;
@@ -146,7 +145,7 @@ Vue.use(VueTap, {
 if (process.env.NODE_ENV === 'development') {
     require('notification-logger');
     logger.init();
-    console.log('欢迎使用vue-bolilerplate.  fe@knowbox.com 敬上.', '欢迎');
+    console.log('欢迎使用vue-bolilerplate. bmbstack.istormcity.com 敬上.', '欢迎');
 }
 ```
 
