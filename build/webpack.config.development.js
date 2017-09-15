@@ -25,6 +25,14 @@ const tips = [
 
 const result = merge(baseConfig, {
     plugins: [
+        // 热更新
+        new webpack.HotModuleReplacementPlugin(),
+        // 兼容老版本Webpack
+        new webpack.LoaderOptionsPlugin({
+            debug: true,
+            progress: true,
+        }),
+        // 环境定义
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"development"',
@@ -37,7 +45,6 @@ const result = merge(baseConfig, {
             onBuildEnd: [`${isWindows?'start':'open'} http://localhost:${PORT}/example.html`]
         })
     ],
-    debug: true,
     devtool: 'source-map',
     stats: {
         colors: true,
@@ -45,8 +52,6 @@ const result = merge(baseConfig, {
         reasons: true,
         assets: true,
     },
-    progress: true,
-    keepalive: true,
     watchOptions: {
         aggregateTimeout: 500, //ms, default is 300
         poll: true

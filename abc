@@ -1,0 +1,14 @@
+transform-inline-consecutive-adds
+transform-merge-sibling-variables
+transform-property-literals
+transform-remove-debugger
+transform-remove-console
+transform-node-env-inline
+transform-member-expression-literals
+transform-minify-booleans
+transform-node-env-inline
+minify-constant-folding
+minify-dead-code-elimination
+minify-guarded-expressions
+minify-simplify
+minify-type-constructors

@@ -30,19 +30,19 @@
 
 // windows特殊处理
 if (process.env.IS_WINDOWS) {
-    require('../static/js/compatible');
+    require('../static/js/compatible-1.1.0.min');
 }
 
 // 仅开发模式使用
 if (process.env.NODE_ENV === 'development') {
-    console.log('欢迎使用vue-bolilerplate.  fe@knowbox.com 敬上.', '欢迎');
+    console.log('欢迎使用vue-bolilerplate.  fe@bmbstack.com 敬上.', '欢迎');
 } 
 
 require('es6-promise/auto');
 
 import Vue from 'vue';
 import VueTap from '../plugins/vue-tap';
-import VueRecord from '../plugins/vue-record';
+//import VueRecord from '../plugins/vue-record';
 import VueToast from '../plugins/vue-toast';
 
 // import global styles
@@ -54,9 +54,9 @@ import '../utils/requestAnimationFrame';
 import router from '../routes/appRoute';
 
 Vue.use(VueTap);
-Vue.use(VueRecord, {
-    host: 'http://domain.com'
-});
+//Vue.use(VueRecord, {
+    //host: 'http://domain.com'
+//});
 Vue.use(VueToast);
 
 // create root instance and mount to #app element

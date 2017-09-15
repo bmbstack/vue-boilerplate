@@ -4,7 +4,7 @@
         "dictionaries": ["jsdoc","closure"]
     },
     "source": {
-        "includePattern": ".+\\.js(doc)?$",
+        "includePattern": ".+\\.js(x)?$",
         "excludePattern": "(^|\\/|\\\\)_|node_modules|src/static"
     },
     "plugins": ["../node_modules/jsdoc-babel"],
