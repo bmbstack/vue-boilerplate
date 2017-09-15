@@ -1,7 +1,7 @@
 {
   "name": "vue-boilerplate",
   "base": "activity-boilerplate@3.5.0",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "vue脚手架",
   "main": "index.js",
   "scripts": {
